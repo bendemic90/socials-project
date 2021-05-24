@@ -7,13 +7,13 @@ import postRoutes from './routes/posts.js'
 
 const app = express()
 
-app.use('/posts', postRoutes);
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ extended: true }));
 app.use(cors())
 
-const mongoConnect = 'asdf';
+app.use('/posts', postRoutes);
+
+const mongoConnect = "";
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(mongoConnect, { useNewUrlParser: true, useUnifiedTopology: true })
