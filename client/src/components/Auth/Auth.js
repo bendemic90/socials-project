@@ -7,16 +7,32 @@ import { FiLock } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom'
 import InputForm from './InputForm'
 import Icon from './icon'
+import { signin, signup } from '../../actions/auth'
+
+const newUser = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' }
 
 const Auth = () => {
     const classes = useStyles();
     const history = useHistory();
     const [showPassword, setShowPassword] = useState(false)
     const [isSignup, changeSignup] = useState(false);
+    const [formData, setFormData] = useState(newUser)
     const dispatch = useDispatch();
 
-    const handleSubmit = () => {}
-    const handleChange = () => {}
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        
+        if(isSignup) {
+            dispatch(signup(formData, history))
+        } else {
+            dispatch(signin(formData, history))
+        }
+    };
+
+    const handleChange = (e) => {
+        e.preventDefault()
+        setFormData({ ...formData, [e.target.name]: e.target.value })
+    };
 
     const handleShowPassword = () => setShowPassword(!showPassword);
 
