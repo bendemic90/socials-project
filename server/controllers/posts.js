@@ -1,5 +1,9 @@
 import PostMessage from '../models/postMessage.js'
 import mongoose from 'mongoose';
+import express from 'express'
+//import router from '../routes/posts.js';
+
+const router = express.Router();
 
 export const getPosts = async (req, res) => {
     try {
@@ -12,13 +16,13 @@ export const getPosts = async (req, res) => {
 
 export const createPost = async (req, res) => {
     const post = req.body;
-    const newPost = new PostMessage(post)
+    const newPost = new PostMessage({ ...post, creator: req.userId, createdAt: new Date().toISOString() })
 
     try {
         await newPost.save()
         res.status(201).json(newPost)
     } catch (error) {
-        res.status(409).json({ message: error.message })
+        res.status(409).json({ message: error })
     }
 }
 
@@ -46,7 +50,9 @@ export const deletePost = async (req, res) => {
 export const likePost = async (req, res) => {
     const { id } = req.params;
 
-    if(!req.userId) return res.json({ message: `Not Authenticated.`})
+    if(!req.userId) {
+        return res.json({ message: `Not Authenticated.`})
+    }
 
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post found with that ID`)
 
@@ -64,3 +70,5 @@ export const likePost = async (req, res) => {
 
     res.json(updatedPost)
 }
+
+export default router;

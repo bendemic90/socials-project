@@ -1,6 +1,7 @@
 import * as api from '../api';
 
-// double arrow function to allow asyncronous execution
+// double arrow function to allow asyncronous execution w/redux-thunk
+
 export const getPosts = () => async (dispatch) => {
     try {
         const { data } = await api.fetchPosts();
@@ -39,8 +40,10 @@ export const deletePost = (id) => async (dispatch) => {
 }
 
 export const likePost = (id) => async (dispatch) => {
+    const user = JSON.parse(localStorage.getItem('profile'))
+
     try {
-        const { data } = await api.likePost(id);
+        const { data } = await api.likePost(id, user?.token);
 
         dispatch({ type: 'LIKE', payload: data})
     } catch (error) {

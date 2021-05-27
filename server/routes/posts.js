@@ -1,7 +1,7 @@
 import express from 'express';
 import { getPosts, createPost, updatePost, deletePost, likePost } from '../controllers/posts.js';
-import auth from '../utils/Auth.js'
 const router = express.Router();
+import auth from '../utils/Auth.js'
 
 router.get('/', getPosts)
 router.post('/', auth, createPost)

@@ -9,12 +9,13 @@ import { deletePost, likePost } from '../../../actions/posts'
 const Post = ({ post, setCurrentId }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const user = JSON.parse(localStorage.getItem('profile'));
 
     return (
         <Card className={classes.card}>
             <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
             <div className={classes.overlay}>
-                <Typography variant="h6">{post.creator}</Typography>
+                <Typography variant="h6">{post.name}</Typography>
                 <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
             </div>
             <div className={classes.overlay2}>
@@ -30,10 +31,10 @@ const Post = ({ post, setCurrentId }) => {
                 <Typography variant="body2" color="textSecondary" component="p">{post.message}</Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
-                <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}>
-                    <FiThumbsUp fontSize="small" />&nbsp;{post.likeCount}
+                <Button disabled={!user?.result} size="small" color="primary" onClick={() => dispatch(likePost(post._id))}>
+                    <FiThumbsUp fontSize="small" />&nbsp;{post.likes.length}
                 </Button>
-                <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
+                <Button disabled={!user?.result} size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
                     <FiSlash fontSize="small" />
                 </Button>
             </CardActions>
