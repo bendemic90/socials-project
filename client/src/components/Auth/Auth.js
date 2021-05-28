@@ -44,13 +44,13 @@ const Auth = () => {
         const token = res?.tokenId;
 
         try {
-            dispatch({ type: 'AUTH', payload: { result, token } })
+            dispatch({ type: 'AUTH', data: { result, token } })
             history.push('/')
         } catch (error) {
             console.log(error)
         }
     }
-    const googleFailure = async (error) => {
+    const googleError = async (error) => {
         console.log(error)
     }
         
@@ -80,7 +80,7 @@ const Auth = () => {
                     <GoogleLogin 
                         clientId="454078895217-h56li9k2s0be6j142m4u5hv1ojeqcmo0.apps.googleusercontent.com"
                         onSuccess={googleSuccess}
-                        onFailure={googleFailure}
+                        onFailure={googleError}
                         cookiePolicy="single_host_origin"
                         render={(renderProps) => (
                             <Button 

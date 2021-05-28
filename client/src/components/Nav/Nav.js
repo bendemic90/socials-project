@@ -16,6 +16,7 @@ const Nav = () => {
     const logout = () => {
         dispatch({ type: 'LOGOUT' });
         history.push('/auth');
+        localStorage.clear();
         setUser(null);
     };
 
@@ -34,7 +35,7 @@ const Nav = () => {
     return (
         <AppBar className={classes.appBar} position="static" color="inherit">
             <div className={classes.brandContainer}>
-            <Typography component={Link} to="/" className={classes.heading} variant="h2" align="center">Socials</Typography>
+            <Typography component={Link} to="/" className={classes.heading} variant="h2" align="center">Decode</Typography>
             <img className={classes.image} src={memories} alt="memories" height="60px"/>
             </div>
             <Toolbar className={classes.toolbar}>
