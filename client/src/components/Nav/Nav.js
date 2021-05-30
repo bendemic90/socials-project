@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { AppBar, Avatar, Button, Toolbar, Typography } from '@material-ui/core';
 import useStyles from './styles';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import memories from '../../images/memories.png';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
 
@@ -12,6 +11,8 @@ const Nav = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation();
+
+    const decodeTitle = "<?>"
     
     const logout = () => {
         dispatch({ type: 'LOGOUT' });
@@ -35,8 +36,7 @@ const Nav = () => {
     return (
         <AppBar className={classes.appBar} position="static" color="inherit">
             <div className={classes.brandContainer}>
-            <Typography component={Link} to="/" className={classes.heading} variant="h2" align="center">Decode</Typography>
-            <img className={classes.image} src={memories} alt="memories" height="60px"/>
+            <Typography component={Link} to="/" className={classes.heading} variant="h2" align="center">Decoded {decodeTitle}</Typography>
             </div>
             <Toolbar className={classes.toolbar}>
                 {user?.result ? (

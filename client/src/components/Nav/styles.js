@@ -10,9 +10,10 @@ export default makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '10px 50px',
+    backgroundColor: '#202020',
   },
   heading: {
-    color: 'rgba(0,183,255, 1)',
+    color: '#DCDCDC',
     textDecoration: 'none',
   },
   image: {
@@ -22,6 +23,7 @@ export default makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'flex-end',
     width: '400px',
+    color: '#DCDCDC'
   },
   profile: {
     display: 'flex',
