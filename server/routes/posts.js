@@ -8,5 +8,6 @@ router.post('/', auth, createPost)
 router.patch('/:id', auth, updatePost)
 router.delete('/:id', auth, deletePost)
 router.patch('/:id/likePost', auth, likePost)
+// added auth middleware to routes
 
 export default router;

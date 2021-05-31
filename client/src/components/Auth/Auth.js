@@ -9,6 +9,7 @@ import InputForm from './InputForm'
 import Icon from './icon'
 import { signin, signup } from '../../actions/auth'
 
+// initialising user state
 const newUser = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' }
 
 const Auth = () => {
@@ -29,6 +30,7 @@ const Auth = () => {
         }
     };
 
+    // abstracted logic to handle all form fields
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     };
@@ -39,6 +41,8 @@ const Auth = () => {
         changeSignup(!isSignup);
         setShowPassword(false);
     }
+
+    // run block on successful google Oauth
     const googleSuccess = async (res) => {
         const result = res?.profileObj;
         const token = res?.tokenId;
@@ -50,11 +54,12 @@ const Auth = () => {
             console.log(error)
         }
     }
+
+    // catch google login error
     const googleError = async (error) => {
         console.log(error)
     }
-        
-
+    
     return (
         <Container component="main" maxWidth="xs" >
             <Paper className={classes.paper} elevation={3}>
@@ -78,6 +83,7 @@ const Auth = () => {
                         {isSignup ? "Sign up" : "Sign in"}
                     </Button>
                     <GoogleLogin 
+                        // client id from googles dev console
                         clientId="454078895217-h56li9k2s0be6j142m4u5hv1ojeqcmo0.apps.googleusercontent.com"
                         onSuccess={googleSuccess}
                         onFailure={googleError}
@@ -96,7 +102,6 @@ const Auth = () => {
                                 </Button>
                         )}
                     />
-                    
                     <Grid container justify="flex-end">
                         <Grid item>
                             <Button fullWidth variant="contained" color="secondary" className={classes.submit} onClick={switchMode}>{ isSignup ? 'I already have an account' : 'Create an account' }</Button>
